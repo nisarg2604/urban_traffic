@@ -85,7 +85,7 @@ def dataset_page():
         display_df = filtered.reset_index(drop=True)
         display_df.index += 1
 
-        styled = display_df.style.applymap(color_congestion, subset=["Congestion Level"])
+       styled = display_df.style.map(color_congestion, subset=["Congestion Level"])
         st.dataframe(styled, use_container_width=True, height=500)
 
         st.divider()
