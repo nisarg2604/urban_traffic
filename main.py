@@ -145,7 +145,17 @@ def login_page():
                                  placeholder="Enter your password")
         role     = st.selectbox("Select Role", ["Government", "User"],
                                 index=None, placeholder="Select your role...")
+        # Demo credentials for interviewers
+        with st.expander("🔍 Demo Credentials (For Interviewer)"):
+            col_a, col_b = st.columns(2)
+        with col_a:
+            st.markdown("**👤 User Account**")
+            st.code("Username: preet\nPassword: 123456A@\nRole: User")
+        with col_b:
+            st.markdown("**🏛️ Government Account**")
+            st.code("Username: nisarg\nPassword: 123456A@\nRole: Government")
 
+if st.button("Login", use_container_width=True, type="primary"):
         if st.button("Login", use_container_width=True, type="primary"):
              if not username or not password or not role:
                  st.error("⚠️ Please fill all fields")
