@@ -149,7 +149,7 @@ def login_page():
         if st.button("Login", use_container_width=True, type="primary"):
              if not username or not password or not role:
                  st.error("⚠️ Please fill all fields")
-            else:
+             else:
                 users = st.secrets.get("users", {})
                 if username in users:
                     user_data = users[username]
