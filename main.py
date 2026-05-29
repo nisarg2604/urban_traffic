@@ -176,6 +176,17 @@ def login_page():
             if st.button("Forget Password?", use_container_width=True):
                 st.query_params["page"] = "Forget"
                 st.rerun()
+        # Demo credentials for interviewers
+        with st.expander("🔍 Demo Credentials (For Interviewer)"):
+            col_a, col_b = st.columns(2)
+            with col_a:
+                st.markdown("**👤 User Account**")
+                st.code("Username: preet\nPassword: 123456A@\nRole: User")
+            with col_b:
+                st.markdown("**🏛️ Government Account**")
+                st.code("Username: nisarg\nPassword: 123456A@\nRole: Government")
+
+
 
 # forget password
 def forget_password():
