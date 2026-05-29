@@ -1,4 +1,4 @@
-﻿streamlit
+streamlit
 pandas
 numpy
 geopy
@@ -7,7 +7,7 @@ streamlit-folium
 scikit-learn
 plotly
 requests
-tensorflow
-keras
 google-generativeai
 groq
+cohere
+huggingface_hub
