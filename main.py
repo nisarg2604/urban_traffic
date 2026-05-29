@@ -25,11 +25,11 @@ SCALER_FILE = "scaler.joblib"
 FILE_NAME = "user.csv"
 
 #Create CSV if missing
-if not os.path.exists(FILE_NAME):
-    pd.DataFrame(columns=[
-        "First Name", "Last Name", "Email", "Phone",
-        "Username", "Password", "Role"
-    ]).to_csv(FILE_NAME, index=False)
+#if not os.path.exists(FILE_NAME):
+#    pd.DataFrame(columns=[
+#        "First Name", "Last Name", "Email", "Phone",
+#        "Username", "Password", "Role"
+#    ]).to_csv(FILE_NAME, index=False)
 
 #Session state defaults
 if "logged_in" not in st.session_state:
@@ -42,12 +42,12 @@ if "role" not in st.session_state:
 # Restore session from query params on refresh
 # This runs BEFORE current_page is read so state is correct when routing
 if "user" in st.query_params and not st.session_state.logged_in:
-    df = load_users()
-    matched = df[df["Username"] == st.query_params["user"]]
-    if not matched.empty:
+    users = st.secrets.get("users", {})
+    if st.query_params["user"] in users:
+        user_data = users[st.query_params["user"]]
         st.session_state.logged_in = True
         st.session_state.username  = st.query_params["user"]
-        st.session_state.role      = matched.iloc[0]["Role"]
+        st.session_state.role      = user_data["role"]
 
 # Read current page AFTER session is restored
 if "page" not in st.query_params:
@@ -147,22 +147,21 @@ def login_page():
                                 index=None, placeholder="Select your role...")
 
         if st.button("Login", use_container_width=True, type="primary"):
-            if not username or not password or not role:
-                st.error("⚠️ Please fill all fields")
+             if not username or not password or not role:
+                 st.error("⚠️ Please fill all fields")
             else:
-                df   = load_users()
-                user = df[
-                    (df["Username"] == username) &
-                    (df["Password"] == hash_password(password)) &
-                    (df["Role"]     == role)
-                ]
-                if not user.empty:
-                    st.session_state.logged_in = True
-                    st.session_state.username  = username
-                    st.session_state.role      = role
-                    st.query_params["page"]    = "Home"
-                    st.query_params["user"]    = username
-                    st.rerun()
+                users = st.secrets.get("users", {})
+                if username in users:
+                    user_data = users[username]
+                    if user_data["password"] == hash_password(password) and user_data["role"] == role:
+                        st.session_state.logged_in = True
+                        st.session_state.username  = username
+                        st.session_state.role      = role
+                        st.query_params["page"]    = "Home"
+                        st.query_params["user"]    = username
+                        st.rerun()
+                    else:
+                        st.error("❌ Invalid credentials. Please check username, password and role.")
                 else:
                     st.error("❌ Invalid credentials. Please check username, password and role.")
 
