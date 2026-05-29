@@ -234,7 +234,7 @@ def map_page():
             else:
                 return "color:#2a9d8f;font-weight:600"
 
-        styled = display.style.applymap(color_status, subset=["Status"])
+        styled = display.style.map(color_status, subset=["Status"])
         st.dataframe(styled, use_container_width=True, height=500)
 
     st.divider()
