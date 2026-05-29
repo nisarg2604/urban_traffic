@@ -138,7 +138,18 @@ def login_page():
         st.title("🚦 Bengaluru Traffic System")
         st.caption("AI-Driven Urban Traffic Congestion Prediction")
         st.divider()
-
+        
+        # Demo credentials for interviewers
+        with st.expander("🔍 Demo Credentials (For Interviewer)"):
+            col_a, col_b = st.columns(2)
+            with col_a:
+                st.markdown("**🏛️ Government Account**")
+                st.code("Username: admin\nPassword: 123456A@\nRole: Government")
+            with col_b:
+                st.markdown("**👤 User Account**")
+                st.code("Username: user\nPassword: 456123A@\nRole: User")
+        st.divider()
+        
         st.title("Login")
         username = st.text_input("Username", placeholder="Enter your username")
         password = st.text_input("Password", type="password",
@@ -176,16 +187,7 @@ def login_page():
             if st.button("Forget Password?", use_container_width=True):
                 st.query_params["page"] = "Forget"
                 st.rerun()
-        st.divider()
-        # Demo credentials for interviewers
-        with st.expander("🔍 Demo Credentials (For Interviewer)"):
-            col_a, col_b = st.columns(2)
-            with col_a:
-                st.markdown("**🏛️ Government Account**")
-                st.code("Username: admin\nPassword: 123456A@\nRole: Government")
-            with col_b:
-                st.markdown("**👤 User Account**")
-                st.code("Username: user\nPassword: 456123A@\nRole: User")
+       
 
 # forget password
 def forget_password():
