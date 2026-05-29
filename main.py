@@ -176,6 +176,7 @@ def login_page():
             if st.button("Forget Password?", use_container_width=True):
                 st.query_params["page"] = "Forget"
                 st.rerun()
+        st.divider()
         # Demo credentials for interviewers
         with st.expander("🔍 Demo Credentials (For Interviewer)"):
             col_a, col_b = st.columns(2)
