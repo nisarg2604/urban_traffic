@@ -246,7 +246,7 @@ def heat_map_page():
             else:
                 return "background-color:rgba(0,200,0,0.1);color:#28a745;font-weight:600"
 
-        styled = display.style.applymap(color_row, subset=["Avg Congestion"])
+        styled = display.style.map(color_row, subset=["Avg Congestion"])
         st.dataframe(styled, use_container_width=True, height=520)
 
     st.divider()
