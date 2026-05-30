@@ -11,3 +11,4 @@ google-generativeai
 groq
 cohere
 huggingface_hub
+streamlit-option-menu
