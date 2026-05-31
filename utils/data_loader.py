@@ -14,14 +14,17 @@ def load_traffic_data():
     return df
 
 def load_users():
-    """Load users from st.secrets instead of user.csv"""
     users = st.secrets.get("users", {})
     rows = []
     for username, data in users.items():
         rows.append({
             "Username": username,
             "Password": data["password"],
-            "Role": data["role"]
+            "Role": data["role"],
+            "First Name": data.get("first_name", username),
+            "Last Name": data.get("last_name", ""),
+            "Email": data.get("email", ""),
+            "Phone": data.get("phone", "")
         })
     return pd.DataFrame(rows)
 
